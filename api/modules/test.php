@@ -55,8 +55,8 @@ class Test{
 		$data = json_decode(file_get_contents("php://input"),true);
 		
 		
-		$user_id = $data['user_id'] == null ? $_POST['user_id'] : $data['user_id'];
-		$password =$data['password'] == null ? $_POST['password'] : $data['password'];
+		$user_id = $_POST['user_id'];
+		$password = $_POST['password'];
 		$ucheck = $db->query("SELECT * FROM users WHERE user_id='$user_id'");
 		if($db->mysqli_num_row($ucheck)>0){
 			$qq = $db->query("SELECT * from users WHERE user_id='$user_id' AND password='$password'");
@@ -87,7 +87,7 @@ class Test{
 	{
 		
 		$data = json_decode(file_get_contents("php://input"),true);
-		$user_id = $data['user_id'] == null ? $_POST['user_id'] : $data['user_id'];
+		$user_id = $_POST['user_id'];
 		
 		
 		$getCourse = $db->query("SELECT DISTINCT course_id,sec,branch,sem,subj,year FROM time_table WHERE user_id='$user_id'");
@@ -102,7 +102,7 @@ class Test{
 	public function getTodayAtt($db){
 	
 		$data = json_decode(file_get_contents("php://input"),true);
-		$user_id = $data['user_id'] == null ? $_POST['user_id'] : $data['user_id'];
+		$user_id = $_POST['user_id'];
 		
 		$day= date('D');
 		if($day=="Wed"){
